@@ -30,6 +30,8 @@ class handdetec:
 
 
     # find the positions (we'll use to then output)
+    #need to add a z field and a way to get it
+    #additionally, have the output by more horizontally
     def findposition(self, img, handNum=0, draw=True):
         lmlist = []
 
@@ -52,6 +54,7 @@ class handdetec:
 
         return lmlist
 
+#converts pixels to meters
 def pixels_to_meters(pixel_x, pixel_y, physical_width, physical_height, resolution_width, resolution_height):
     pixel_size_horizontal = physical_width / resolution_width
     pixel_size_veritcal = physical_height / resolution_height
