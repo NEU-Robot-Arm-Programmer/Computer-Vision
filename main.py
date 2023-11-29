@@ -40,7 +40,7 @@ class handDetector():
 def main():
     cTime = 0
     pTime = 0
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     detector = handDetector()
     while True:
         success, img = cap.read()
