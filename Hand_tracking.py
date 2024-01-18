@@ -58,7 +58,7 @@ class handdetec:
 
                 lmlist.append([id, cx, cy, real_world_x, real_world_y])
                 if draw:
-                    cv2.circle(img, (cx, cy), 15, (255, 0, 0), cv2.FILLED)
+                    cv2.circle(img, (cx, cy), 10, (255, 0, 0), cv2.FILLED)
 
         # cx = pixel x value, cy = pixel y value
         return lmlist
