@@ -5,7 +5,7 @@ from Hand_tracking import handdetec
 import mediapipe
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-#thresholds for hand
+#Threshold for hand
 OPEN_THRESH = 0.5
 CLOSED_THRESH = 150 #or for x it is 0.1 to 0.3 and y 0.4 to 0.7
 #Intialize hand tracking
@@ -27,9 +27,10 @@ def hand_gestures(hand_landmarks):
 
     distance = ((thumb_x - wrist_x) **2 + (thumb_y - wrist_y) **2)**0.5
 
-    if thumb_y < fingers_y : #< wrist_y:
+    #Checks if teh distance from your fingers and your thumb large
+    if thumb_y < fingers_y : #
         return "Open"
-    elif thumb_y > fingers_y: # > wrist_y:
+    elif thumb_y > fingers_y:
         return "Closed"
     else:
         return "unknown"
@@ -57,8 +58,8 @@ def main():
                 cv2.putText(img, f'Gesture: {gesture}', (10,30), cv2.FONT_HERSHEY_SIMPLEX,
                             1, (0, 255,0), 2)
             else:
+                #the camera can't see you hand clearly and it needs to be in sight on window
                 print("Not enough hand seen") #wouldn't this then always output not enough because the code draws 3???
-
 
         #display the frame
         cv2.imshow("Hand Tracking", img)
@@ -69,7 +70,7 @@ def main():
 
         cv2.putText(img, f'FFPS: {int(fps)}', (10, 70), cv2.FONT_HERSHEY_PLAIN,
                     1, (255, 0, 255), 1)
-        #Check for the key 'q' to quit
+        #Checks for the key 'q' to quit and closes the window
         if cv2.waitKey(2) & 0xFF == ord('q'):
             break
 
