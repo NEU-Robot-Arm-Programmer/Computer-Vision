@@ -24,6 +24,7 @@ def hand_gestures(hand_landmarks):
     fingers_y = hand_landmarks[5][2] #weird
     wrist_x = hand_landmarks[0][1]
     wrist_y = hand_landmarks[0][2]
+    
 
     distance = ((thumb_x - wrist_x) **2 + (thumb_y - wrist_y) **2)**0.5 #this may not be needed for right now
 
