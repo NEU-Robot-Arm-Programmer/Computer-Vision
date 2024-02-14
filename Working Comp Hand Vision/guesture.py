@@ -5,7 +5,6 @@ from Hand_tracking import handdetec
 import mediapipe
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
-
 #thresholds for hand
 OPEN_THRESH = 0.5
 CLOSED_THRESH = 150 #or for x it is 0.1 to 0.3 and y 0.4 to 0.7
