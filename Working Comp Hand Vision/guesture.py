@@ -12,6 +12,7 @@ CLOSED_THRESH = 150 #or for x it is 0.1 to 0.3 and y 0.4 to 0.7
 hand = handdetec()
 cap = cv2.VideoCapture(0)
 
+
 def hand_gestures(hand_landmarks):
     """
     Based off the movement of the hand it will detect when it opens
