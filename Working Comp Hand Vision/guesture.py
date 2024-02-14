@@ -35,6 +35,7 @@ def hand_gestures(hand_landmarks):
     else:
         return "unknown"
 
+
 def main():
     cTime = 0
     pTime = 0
