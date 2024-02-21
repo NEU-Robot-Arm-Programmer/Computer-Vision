@@ -30,9 +30,9 @@ def hand_gestures(hand_landmarks):
     distance = ((thumb_x - wrist_x) **2 + (thumb_y - wrist_y) **2)**0.5 #this may not be needed for right now
 
     #Checks if the distance from your fingers and your thumb large
-    if thumb_y < fingers_y : #
+    if thumb_y > fingers_y : #
         return "Open"
-    elif thumb_y > fingers_y:
+    elif thumb_y < fingers_y:
         return "Closed"
     else:
         return "unknown"

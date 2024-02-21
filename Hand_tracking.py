@@ -25,7 +25,7 @@ class handdetec:
         self.mpdraw = mp.solutions.drawing_utils
 
     # job is to find the hands
-    def findhands(self, img, draw=True):
+    def find_hands(self, img, draw=True):
         self.RGBimg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.result = self.hands.process(self.RGBimg)
 
@@ -36,11 +36,10 @@ class handdetec:
 
         return img
 
-
     # find the positions (we'll use to then output)
     #need to add a z field and a way to get it
     #additionally, have the output by more horizontally
-    def findposition(self, img, handNum=0, draw=True):
+    def find_position(self, img, handNum=0, draw=True):
         lmlist = []
 
         if self.result.multi_hand_landmarks:
