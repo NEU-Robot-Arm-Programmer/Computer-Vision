@@ -3,8 +3,9 @@ import mediapipe as mp
 import time
 import numpy as np
 
+#TODO: Make the meters function to milimeters by multiplying denom by 1000
 class handdetec:
-    def __init__(self, mode=False, MaxHands=2, modelComplex=1, detection=0.5, tracking=0.5):
+    def __init__(self, mode=False, MaxHands=2, modelComplex=1, detection=0.75, tracking=0.75):
         self.mode = mode
         self.MaxHands = MaxHands
         self.complex = modelComplex
@@ -34,15 +35,17 @@ class handdetec:
                                            hand_landmarks.landmark[16].y + hand_landmarks.landmark[20].y) / 4 *
                                           img.shape[0]))
                     wrist = (int(hand_landmarks.landmark[0].x * img.shape[1]), int(hand_landmarks.landmark[0].y * img.shape[0]))
+                    #landmark for the wrist
 
+                    #call the angles function
                     angles = self.calculate_angles(hand_landmarks)
                     for i, angle in enumerate(angles.values()):
                         #check if the angle is a float
                         if isinstance(angle, float):
                             # draw angle near the wrist
-                            cv2.putText(img, f'Angle {i + 1}: {angle:.2f}',
+                            cv2.putText(img, f'Angles {i + 1}: {angle:.2f}',
                                         (10, img.shape[0] - 20 * (len(angles) - i)), #this places the text under fps
-                                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 255), 1)
+                                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (140, 0, 255), 1)
 
                     #Draws the points on fingers, thumb, and wrisr
                     cv2.circle(img, thumb_tip, 20, (255, 0, 0), cv2.FILLED)
@@ -70,7 +73,7 @@ class handdetec:
 
             physical_width = 1.0 #example in meters
             physical_height = 1.0
-            physical_depth = 1.0
+            physical_depth = 1.0 #this will be used for the z axis
             resolution_width, resolution_height, resolution_depth = img.shape[0], img.shape[1], img.shape[2]
 
             for id, lm in enumerate(myHand.landmark):
@@ -94,12 +97,14 @@ class handdetec:
     def calculate_angles(self, hand_landmarks):
         """Calculates the angles that the hand is moving on camera"""
         angles = {}
-
-        finger_indicies = [4, 8, 12, 16, 20] #Thumb, index, middle, ring, pinky
-        palm_indicies = [0, 1, 5, 9, 13, 17] #from teh wrist to the joints of the fingers
+        # Thumb, index, middle, ring, pinky
+        finger_indicies = [4, 8, 12, 16, 20]
+        # from teh wrist to the joints of the fingers
+        palm_indicies = [0, 1, 5, 9, 13, 17]
 
         #calc angles between palm and finger??
         for finger_indx in range(len(finger_indicies)):
+            #take all te finger numbers
             tip = finger_indicies[finger_indx]
             base = palm_indicies[finger_indx]
 
@@ -111,7 +116,7 @@ class handdetec:
             base_vector = np.array([base_landmark.x, base_landmark.y, base_landmark.z])
             wrist_vector = np.array([wrist_landmark.x, wrist_landmark.y, wrist_landmark.z])
 
-            #calculate teh angle between teh finger vectors and the wrists
+            #calculate the angle between the finger vectors and the wrists
             finger_wrist_vector = wrist_vector - base_vector
             dot_product = np.dot(tip_vector - base_vector, finger_wrist_vector)
             magnitude_prod = np.linalg.norm(tip_vector - base_vector) * np.linalg.norm(finger_wrist_vector)
@@ -130,7 +135,8 @@ class handdetec:
         wrist_base = np.array([hand_landmarks.landmark[0].x, hand_landmarks.landmark[0].y, hand_landmarks.landmark[0].z])
 
         wrist_vector = wrist_tip - wrist_base
-        reference_vector = np.array([0, 0, 1])  # Assuming z-axis is upward
+        # Assuming z-axis is upward
+        reference_vector = np.array([0, 0, 1])
         wrist_angle = np.arccos(np.dot(wrist_vector, reference_vector) / (
                     np.linalg.norm(wrist_vector) * np.linalg.norm(reference_vector)))
         angles['Wrist_Flexion_Extension'] = np.degrees(wrist_angle)
@@ -163,6 +169,7 @@ def main():
         detector = handdetec()
         img = detector.find_hands(img)
         lm_list = detector.find_position(img)
+        #make sure that the list of coordinates is not
         if len(lm_list) != 0:
             print(lm_list)
 
