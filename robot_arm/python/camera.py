@@ -1,9 +1,16 @@
+#!/usr/bin/python3
+
 import cv2
 import mediapipe as mp
 import time
+import re
+import rospy
 import numpy as np
+import serial
+import threading
+import utm
+from robot_arm.msg import camera_dists
 
-#TODO: Make the meters function to milimeters by multiplying denom by 1000
 class handdetec:
     def __init__(self, mode=False, MaxHands=2, modelComplex=1, detection=0.75, tracking=0.75):
         self.mode = mode
@@ -22,7 +29,7 @@ class handdetec:
         """Identifies what the hand is in front of teh camera then draws points on it"""
         self.RGBimg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.result = self.hands.process(self.RGBimg)
-
+        angles = []
 
         if self.result.multi_hand_landmarks:
             for hand_landmarks in self.result.multi_hand_landmarks:
@@ -56,11 +63,12 @@ class handdetec:
                     cv2.line(img, wrist, thumb_tip, (255, 255, 255), 3)  # Line from wrist to thumb
                     cv2.line(img, wrist, fingers_center, (255, 255, 255), 3)  # Line from wrist to fingers center
                     cv2.line(img, thumb_tip, fingers_center, (255, 255, 255), 3)  # Line from thumb to fingers center
-
-        return img
+        
+        return img, angles
 
 
     # find the positions (we'll use to then output)
+    # might need to change origin_ variables to the previous outputed coordinates instead of 0,0,0
     def find_position(self, img, handNum=0):
         """Finds the position of the hand from the points on the hand"""
         lmlist = []
@@ -160,34 +168,45 @@ def pixels_to_meters(pixel_x, pixel_y, pixel_z, physical_width, physical_height,
 def main():
     cTime = 0
     pTime = 0
-    cap = cv2.VideoCapture(4)
+    cap = cv2.VideoCapture(2)
     detector = handdetec()
-    prev = 0
-    frame_rate = 5
+
+    pub = rospy.Publisher('/camera_dists', camera_dists, queue_size=10)
+    rospy.init_node('camera', anonymous=True)
+    message = camera_dists()
 
     while True:
-        time_elapsed = time.time() - prev
         success, img = cap.read()
+        # class object
+        detector = handdetec()
+        img, hand_angle = detector.find_hands(img)
+        lm_list = detector.find_position(img)
+       # print(lm_list)
+        #make sure that the list of coordinates is not
 
-        if time_elapsed > (1 / frame_rate):
-            prev = time.time()
-            # class object
+        if not lm_list == [] and not hand_angle == []:
+            message.x_dist = lm_list[0][1] * 1000 # convert to millimeters
+            message.y_dist = lm_list[0][2] * 1000
+            message.z_dist = lm_list[0][3] * 1000
+            message.r = hand_angle["Finger_1 + 1"]
+            message.p = 0 #hand_angle["Wrist_Flexion_Extension"]
+            message.y = 0  
+            message.isClosed = False;
+            #print(message.z_dist)
+            pub.publish(message)
+        
+        # calculating time
+        cTime = time.time()
+        fps = 1 / (cTime - pTime)
+        pTime = cTime
 
-            detector = handdetec()
-            img = detector.find_hands(img)
-            lm_list = detector.find_position(img)
-            #make sure that the list of coordinates is not
+        cv2.putText(img, f'FPS: {int(fps)}', (10, 70), cv2.FONT_HERSHEY_PLAIN,
+                    1, (255, 0, 255), 1)
 
-            # calculating time
-            #cTime = time.time()
-            fps = frame_rate
-            #pTime = cTime
+        cv2.imshow('Hand Tracking', img) #Window name
+        if cv2.waitKey(20) & 0xFF == ord('q'):  #this will close the window
+            break
 
-            cv2.putText(img, f'FPS: {int(fps)}', (10, 70), cv2.FONT_HERSHEY_PLAIN, 1, (255, 0, 255), 1)
-
-            cv2.imshow('Hand Tracking', img) #Window name
-            if cv2.waitKey(20) & 0xFF == ord('q'):  #this will close the window
-                break
 
     cap.release()
     cv2.destroyAllWindows()

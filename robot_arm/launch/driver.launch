@@ -1,0 +1,5 @@
+<launch>
+  <node name="camera" pkg="robot_arm" type="camera.py" output="screen"></node>  
+  <node name="convert_node" pkg="robot_arm" type="joint_angle_pub.py" output="screen"></node>
+  <node name="arduino" pkg="robot_arm" type="arduino.py" output="screen"></node>
+</launch>                     

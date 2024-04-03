@@ -122,7 +122,7 @@ def pixels_to_meters(pixel_x, pixel_y, physical_width, physical_height, resoluti
 def main():
     cTime = 0
     pTime = 0
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(4)
     while True:
         success, img = cap.read()
         # class object
