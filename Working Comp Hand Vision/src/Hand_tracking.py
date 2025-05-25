@@ -8,11 +8,11 @@ import mediapipe as mp
 import numpy as np
 import pyrealsense2 as rs
 import serial
-
 import time
 from realsense import depth_frame
 from sympy import limit
 from adafruit_bno055 import BNO055
+
 
 # TODO: Be able to calculate the angle that the wrist (marking 0) is bending and rotating at based on the face
 #  of the hand Level: Hard
