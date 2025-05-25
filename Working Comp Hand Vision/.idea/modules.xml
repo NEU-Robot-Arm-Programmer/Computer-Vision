@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Comp Hand Vision.iml" filepath="$PROJECT_DIR$/.idea/Comp Hand Vision.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pytest_proj/.idea/pytest_proj.iml" filepath="$PROJECT_DIR$/../pytest_proj/.idea/pytest_proj.iml" />
+    </modules>
+  </component>
+</project>
