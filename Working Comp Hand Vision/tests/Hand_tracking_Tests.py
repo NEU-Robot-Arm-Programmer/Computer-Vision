@@ -49,51 +49,6 @@ class TestHandDetect(unittest.TestCase):
 
 
 
-    # def test_findhands(self):
-    #     #have an instance of the hands
-    #     detector = handdetec()
-    #     #these is the address of the test picture I used
-    #     img_open = cv2.imread(r"C:\Users\steph\Downloads\open_palm.jpg")
-    #     result_img_open = detector.findhands(img_open, draw=False)
-    #     self.assertIsNotNone(result_img_open)
-    #     expected_hands_open = 1
-    #     self.assertEqual(len(detector.result.multi_hand_landmarks), expected_hands_open)
-    #     if expected_hands_open == 1:
-    #         expected_coordinates_open = {
-    #             0: (expected_x0, expected_y0),  # Replace with actual expected coordinates
-    #             1: (expected_x1, expected_y1),
-    #         }
-    #         for id, (real_world_x, real_world_y) in expected_coordinates_open.items():
-    #             self.assertAlmostEqual(positions[id][1], real_world_x, places=2)
-    #             self.assertAlmostEqual(positions[id][2], real_world_y, places=2)
-    #
-    #
-    #     #img = cv2.imread(r"C:\Users\steph\Downloads\handtest.jpg")
-    #     img_curved_hand = cv2.imread(r"C:\Users\steph\Downloads\curved_palm.jpg")
-    #     #call the method to find the hand
-    #     result_img_curved = detector.findhands(img_curved_hand, draw=False)
-    #     #need assertions based on the expected behavior
-    #     self.assertIsNotNone(result_img_curved)
-    #     #assertion 1: The correct number of hand landmarks is detected.
-    #     expected_hands_curved = 1
-    #     self.assertEqual(len(detector.result.multi_hand_landmarks), expected_hands)
-    #
-    #     #assertion 3: detected landmarks have the expected coordinates.
-    #     if expected_hands_curved == 1:
-    #         expected_coordinates_curved = {
-    #             0: (expected_x0_cur, expected_y0_cur), #expected_x0 etc are specific x and y coordinates for the landmarks
-    #             #i think these need to be actual coordinates
-    #             1: (expected_x1_cur, expected_y1_cur),
-    #             2: (expected_x2_cur, expected_y2_cur),
-    #             3: (expected_x3_cur, expected_y3_cur),
-    #             4: (expected_x4_cur, expected_y4_cur),
-    #             5: (expected_x5_cur, expected_y5_cur),
-    #             6: (expected_x6_cur, expected_y6_cur),
-    #         }
-    #         for id, (real_world_x, real_world_y) in expected_coordinates_curved.items():
-    #             self.assertAlmostEqual(positions[id][1], real_world_x, places=2)
-    #             self.assertAlmostEqual(positions[id][2], real_world_y, places=2)
-
 #this one works
     """ A test the works to make sure the converstion of pixels to meters is accurate"""
 def test_pixels_to_meters(self):

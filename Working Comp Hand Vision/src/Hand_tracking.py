@@ -14,7 +14,6 @@ from realsense import depth_frame
 from sympy import limit
 from adafruit_bno055 import BNO055
 
-
 # TODO: Be able to calculate the angle that the wrist (marking 0) is bending and rotating at based on the face
 #  of the hand Level: Hard
 # TODO: Add Rotation and bending of the hand : Level Moderate
