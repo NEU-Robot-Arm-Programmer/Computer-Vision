@@ -48,7 +48,6 @@ class TestHandDetect(unittest.TestCase):
             #other tests based on teh expected behavior of position
 
 
-
 #this one works
     """ A test the works to make sure the converstion of pixels to meters is accurate"""
 def test_pixels_to_meters(self):
