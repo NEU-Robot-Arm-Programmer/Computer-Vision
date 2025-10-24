@@ -28,11 +28,11 @@ project-root/
 ├── robot_arm/
 ├── src/
 │   └── archive/                # Older / experimental versions
-│       └── ashraf-openCV
-│       └── guestures
+│       └── ashraf-openCV/
+│       └── guestures/
 │           ├──Guesture_recognition.py # Gesture recognition logic
 │           ├──guesture.py
-│       └── PreviousVersions
+│       └── PreviousVersions/
 │           ├── Hand_tracking Tests.py
 │           ├── Hand-Track2.py
 │           ├── Hand_tracking.py
