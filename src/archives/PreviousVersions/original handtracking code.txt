@@ -1,0 +1,105 @@
+handtrankinc working: 
+import cv2
+import mediapipe as mp
+import pyrealsense2
+import time
+
+class handdetec:
+    def __init__(self, mode=False, max_hands=2, modelComplex=1, detection=0.5, tracking=0.5):
+        self.mode = mode
+        self.max_hands = max_hands
+        self.complex = modelComplex
+        self.detection = detection
+        self.track = tracking
+
+        # detecting the landmarks
+        self.mpHands = mp.solutions.hands
+        self.hands = self.mpHands.Hands(self.mode, self.max_hands, modelComplex, detection, tracking)
+        self.mpdraw = mp.solutions.drawing_utils
+
+    # job is to find the hands
+    def findhands(self, img, draw=True):
+        self.RGBimg = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        self.result = self.hands.process(self.RGBimg)
+
+        if self.result.multi_hand_landmarks:
+            for handlms in self.result.multi_hand_landmarks:
+                if draw:
+                    self.mpdraw.draw_landmarks(img, handlms, self.mpHands.HAND_CONNECTIONS)
+
+        return img
+
+
+    # find the positions (we'll use to then output)
+    def findposition(self, img, handNum=0, draw=True):
+        lmlist = []
+
+        if self.result.multi_hand_landmarks:
+            myHand = self.result.multi_hand_landmarks[handNum]
+
+            #coordinates fo the origin
+            origin_x, origin_y, origin_z = 0.0, 0.0, 0.0
+
+            physical_width = 1.0 #example in meters
+            physical_height = 1.0
+            physical_depth = 1.0
+            resolution_width, resolution_height, resolution_depth = img.shape[0], img.shape[1], img.shape[2]
+
+            for id, lm in enumerate(myHand.landmark):
+                h, w, d = img.shape
+                cx, cy, cz = int(lm.x * w), int(lm.y * h), int(lm.z * d)
+                #convert the pixels to meters
+                real_world_x, real_world_y, real_world_z = pixels_to_meters(cx, cy, cz, physical_depth, physical_width, physical_height, resolution_width, resolution_height)
+
+                #now make the coordinates relative to the origin
+                relative_x = real_world_x - origin_x
+                relative_y = real_world_y - origin_y
+                relative_z = real_world_z - origin_z
+                lmlist.append([id, relative_x, relative_y, relative_z]) #real_world_x, real_world_y])
+
+                if draw:
+                    cv2.circle(img, (cx, cy), 10, (0, 128, 128), cv2.FILLED)
+
+        return lmlist
+3
+def pixels_to_meters(pixel_x, pixel_y, pixel_z, physical_width, physical_height, resolution_width, resolution_height, resolution_depth):
+    pixel_size_horizontal = physical_width / resolution_width
+    pixel_size_veritcal = physical_height / resolution_height
+    pixel_size_depth = physical_width / resolution_depth
+
+    real_world_x = pixel_x * pixel_size_horizontal
+    real_world_y = pixel_y * pixel_size_veritcal
+    real_world_z = pixel_z * pixel_size_depth
+
+    return real_world_x, real_world_y, real_world_z
+
+
+def main():
+    cTime = 0
+    pTime = 0
+    cap = cv2.VideoCapture(0)
+    while True:
+        success, img = cap.read()
+        # class object
+        detector = handdetec()
+        img = detector.findhands(img)
+        position = detector.findposition(img)
+
+        if len(position) != 0:
+            print(position)
+
+        # calculating time
+        cTime = time.time()
+        fps = 1 / (cTime - pTime)
+        pTime = cTime
+
+        cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN,
+                    1, (0, 0, 255), 1)
+
+        cv2.imshow('img', img)
+        if cv2.waitKey(20) & 0xFF == ord('d'):
+            break
+
+if __name__ == '__main__':
+    main()
+
