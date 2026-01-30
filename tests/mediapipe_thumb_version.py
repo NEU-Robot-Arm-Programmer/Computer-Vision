@@ -1,3 +1,15 @@
+"""This script uses mediapipe only to control the actual geometry of Hand V2 in pybullet
+
+-install pybullet, download the required mediapipe model (see below), and download the URDF of the hand prior to use
+-thumb tracking is spotty but somewhat working
+-to use:
+    -start with your hand in a fully open position with the thumb abducted as far as possible 
+    (try to match the hand model's initial pose
+    -press 'c' to calibrate 
+    -you will see a target position based on the thumb tip marker, as well as an actual position on the thumb
+    -the IK is solved with numerical methods and sometimes struggles near the joint limits
+"""
+
 import os
 import time
 import math
@@ -13,12 +25,12 @@ from mediapipe.tasks.python import vision
 from mediapipe.framework.formats import landmark_pb2
 
 # ----------------------------
-# USER CONFIG
+# USER CONFIG (change here)
 # ----------------------------
 URDF_PATH = r"C:/Users/epfis/Documents/NU robotics hand/hand teleop/hand_urdf/hand_2.urdf"
 URDF_DIR = os.path.dirname(URDF_PATH)
 
-MODEL = r"C:/Users/epfis/Documents/hand tracking/hand_landmarker.task"
+MODEL = r"C:/Users/epfis/Documents/hand tracking/hand_landmarker.task" #download this model from google's mediapipe page
 WINDOW = "Hand + PyBullet"
 
 NUM_LANDMARKS = 21
@@ -566,4 +578,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
