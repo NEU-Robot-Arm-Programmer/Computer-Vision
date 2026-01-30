@@ -36,17 +36,15 @@ q6_max = 400
 
 max_speeds = np.array([q1_max,q2_max,q3_max,q4_max,q5_max,q6_max])
 
-#below are the number of steps in a full rotation for each joint
-q1_steps = 200*25.500
-q2_steps = 800*5.333333
-q3_steps = 400*16.4706
-q4_steps = 800*10.00
-q5_steps = 800*4.8000
-q6_steps = 800*4.8000
+geometry_folder_location = r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer" #<-----example location, change 
 
-#steps to deg = 360/q_steps
-
-steps = np.array([q1_steps,q2_steps,q3_steps,q4_steps,q5_steps,q6_steps])
+ground_mesh_location = geometry_folder_location+r"\dummy arm ground.stl"
+base_mesh_location = geometry_folder_location+r"\dummy arm base.stl"
+shoulder_mesh_location = geometry_folder_location+r"\dummy arm shoulder.stl"
+upper_arm_mesh_location = geometry_folder_location+r"\dummy arm upper arm.stl"
+elbow_mesh_location = geometry_folder_location+r"\dummy arm elbow.stl"
+lower_arm_mesh_location = geometry_folder_location+r"\lower arm.stl"
+wrist_mesh_location = geometry_folder_location+r"\dummy arm hand.stl"
 
 viewer_refresh = 30 #pretty sure this does noting 
 
@@ -169,43 +167,32 @@ def map(value, fromMin, fromMax, toMin, toMax):
     # Convert the 0-1 range into a value in the right range.
     return toMin + (valueScaled * toSpan)
 
-def moition_scaler(current_joints,target_joints): #i think the goal of this was to output a speed that each joint could take in a certain move so they all arrived together
-    #A = joints#np.array([joint_a[0],joint_a[1],joint_a[2],joint_a[3],joint_a[4],joint_a[5]]) #can this just be the input array? or is 'joint_a' not already a numpy array
-    #B = inverse_kinematics(point[0],point[1],point[2],point[3],point[4],point[5]) #this will return a array of joint positions to get to point B
-    diff = (current_joints-target_joints)*steps #take the goal and subtract the joints to find the angular distance and then get that number in steps (don't know if thats doing the steps part right)
-    #print(diff)
-    time = diff/max_speeds #find the time it will take each joint to complete this move using max speed for each
-    move_time = time.max() #find the longest time of those joints and use that as the total time for the move 
-    scaled_speeds = diff/move_time #scale the move to take the max amount of time (don't know if this is scaling correctly)
-    #print(scaled_speeds)
-    return scaled_speeds #output the scaled speeds
 
-
-ground = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm ground.stl")
+ground = trimesh.load(ground_mesh_location)
 ground.visual.face_colors = np.multiply(np.ones(ground.faces.shape),np.array([.75,.75,.75]))
 ground_mesh = pyrender.Mesh.from_trimesh(ground, smooth = False)
 
-base = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm base.stl")
+base = trimesh.load(base_mesh_location)
 base.visual.face_colors = np.multiply(np.ones(base.faces.shape),np.array([.75,.75,.75]))
 base_mesh = pyrender.Mesh.from_trimesh(base, smooth = False)
 
-shoulder = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm shoulder.stl")
+shoulder = trimesh.load(shoulder_mesh_location)
 shoulder.visual.face_colors = np.multiply(np.ones(shoulder.faces.shape),np.array([.75,.75,.75]))
 shoulder_mesh = pyrender.Mesh.from_trimesh(shoulder, smooth = False)
 
-upper_arm = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm upper arm.stl")
+upper_arm = trimesh.load(upper_arm_mesh_location)
 upper_arm.visual.face_colors = np.multiply(np.ones(upper_arm.faces.shape),np.array([.75,.75,.75]))
 upper_arm_mesh = pyrender.Mesh.from_trimesh(upper_arm, smooth = False)
 
-elbow = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm elbow.stl")
+elbow = trimesh.load(elbow_mesh_location)
 elbow.visual.face_colors = np.multiply(np.ones(elbow.faces.shape),np.array([.75,.75,.75]))
 elbow_mesh = pyrender.Mesh.from_trimesh(elbow, smooth = False)
 
-lower_arm = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\lower arm.stl")
+lower_arm = trimesh.load(lower_arm_mesh_location)
 lower_arm.visual.face_colors = np.multiply(np.ones(lower_arm.faces.shape),np.array([.75,.75,.75]))
 lower_arm_mesh = pyrender.Mesh.from_trimesh(lower_arm, smooth = False)
 
-wrist = trimesh.load(r"C:\Users\epfis\Documents\NU robotics\dummy geometry for renderer\dummy arm hand.stl")
+wrist = trimesh.load(wrist_mesh_location)
 wrist.visual.face_colors = np.multiply(np.ones(wrist.faces.shape),np.array([.75,.75,.75]))
 wrist_mesh = pyrender.Mesh.from_trimesh(wrist, smooth = False)
 
