@@ -1,0 +1,835 @@
+<?xml version="1.0" ?>
+<!-- Generated using onshape-to-robot -->
+<!-- Onshape https://cad.onshape.com/documents/44d65dc8544a56cf71da3f0a/w/972a27a2efc9b3919ab3a95b/e/e91fcd8ebfee97c1ce23ea10 -->
+<robot name="C:\Users\epfis\Documents\NU robotics hand\hand teleop\arm_urdf">
+  <!-- Link ground -->
+  <link name="ground">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part ground -->
+    <visual>
+      <origin xyz="0 5.44968e-18 0.082" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets\ground.stl"/>
+      </geometry>
+      <material name="ground_material">
+        <color rgba="1 0.756863 0.054902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 5.44968e-18 0.082" rpy="1.5708 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets\ground.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link base -->
+  <link name="base">
+    <inertial>
+      <origin xyz="0 -9.60797e-07 -0.132919" rpy="0 0 0"/>
+      <mass value="2.40324"/>
+      <inertia ixx="0.00456464" ixy="-6.7298e-07" ixz="6.7298e-07" iyy="0.029311" iyz="1.32847e-07" izz="0.029311"/>
+    </inertial>
+    <!-- Part actuator_single_part -->
+    <visual>
+      <origin xyz="-0.124008 9.36751e-17 -0.132918" rpy="-1.5708 -7.14845e-27 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets\actuator_single_part.stl"/>
+      </geometry>
+      <material name="actuator_single_part_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.124008 9.36751e-17 -0.132918" rpy="-1.5708 -7.14845e-27 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets\actuator_single_part.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part base -->
+    <visual>
+      <origin xyz="0 0 0.02" rpy="-1.5708 -0 6.41283e-50"/>
+      <geometry>
+        <mesh filename="package://assets\base.stl"/>
+      </geometry>
+      <material name="base_material">
+        <color rgba="0.513725 0.737255 0.407843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.02" rpy="-1.5708 -0 6.41283e-50"/>
+      <geometry>
+        <mesh filename="package://assets\base.stl"/>
+      </geometry>
+    </collision>
+    <!-- Part actuator_single_part_2 -->
+    <visual>
+      <origin xyz="0.124008 -1.38152e-16 -0.132918" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\actuator_single_part.stl"/>
+      </geometry>
+      <material name="actuator_single_part_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.124008 -1.38152e-16 -0.132918" rpy="-3.14159 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\actuator_single_part.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link shoulder -->
+  <link name="shoulder">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part shoulder -->
+    <visual>
+      <origin xyz="-0.152918 1.22322e-17 -0.1" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\shoulder.stl"/>
+      </geometry>
+      <material name="shoulder_material">
+        <color rgba="0.32549 0.529412 0.752941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.152918 1.22322e-17 -0.1" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\shoulder.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link upper_arm -->
+  <link name="upper_arm">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part upper_arm -->
+    <visual>
+      <origin xyz="9.86076e-32 0.152918 0.08" rpy="3.14159 -4.32131e-33 4.23705e-33"/>
+      <geometry>
+        <mesh filename="package://assets\upper_arm.stl"/>
+      </geometry>
+      <material name="upper_arm_material">
+        <color rgba="0.866667 0.321569 0.156863 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="9.86076e-32 0.152918 0.08" rpy="3.14159 -4.32131e-33 4.23705e-33"/>
+      <geometry>
+        <mesh filename="package://assets\upper_arm.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link elbow -->
+  <link name="elbow">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part elbow -->
+    <visual>
+      <origin xyz="-0.152918 -0.34 -0.04" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\elbow.stl"/>
+      </geometry>
+      <material name="elbow_material">
+        <color rgba="0.513725 0.415686 0.733333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.152918 -0.34 -0.04" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\elbow.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link base_2 -->
+  <link name="base_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part base_2 -->
+    <visual>
+      <origin xyz="-0.00205515 0.0111278 -0.300889" rpy="-1.5708 -3.45716e-31 8.66668e-33"/>
+      <geometry>
+        <mesh filename="package://assets\base__2.stl"/>
+      </geometry>
+      <material name="base_2_material">
+        <color rgba="0.0941176 0.580392 0.545098 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00205515 0.0111278 -0.300889" rpy="-1.5708 -3.45716e-31 8.66668e-33"/>
+      <geometry>
+        <mesh filename="package://assets\base__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link intermediate_link -->
+  <link name="intermediate_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part intermediate_link -->
+    <visual>
+      <origin xyz="0.0683891 -0.00812779 0.0358367" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\intermediate_link.stl"/>
+      </geometry>
+      <material name="intermediate_link_material">
+        <color rgba="0.980392 0.713725 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0683891 -0.00812779 0.0358367" rpy="1.5708 1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\intermediate_link.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link palm_solid -->
+  <link name="palm_solid">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part palm_solid -->
+    <visual>
+      <origin xyz="0.0431891 0.00812779 -0.0355367" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\palm_solid.stl"/>
+      </geometry>
+      <material name="palm_solid_material">
+        <color rgba="0.682353 0.333333 0.737255 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0431891 0.00812779 -0.0355367" rpy="-1.5708 -1.5708 0"/>
+      <geometry>
+        <mesh filename="package://assets\palm_solid.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link thumb_intermediate_v1 -->
+  <link name="thumb_intermediate_v1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part thumb_intermediate_v1 -->
+    <visual>
+      <origin xyz="-0.00989613 -0.00238569 0.000259753" rpy="-1.31743 0.17263 8.53444e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_intermediate_v1.stl"/>
+      </geometry>
+      <material name="thumb_intermediate_v1_material">
+        <color rgba="0.513725 0.737255 0.407843 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00989613 -0.00238569 0.000259753" rpy="-1.31743 0.17263 8.53444e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_intermediate_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link thumb_palm_section -->
+  <link name="thumb_palm_section">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part thumb_palm_section -->
+    <visual>
+      <origin xyz="-0.0217843 0.00434121 0.000740247" rpy="1.82417 -0.17263 -3.79536e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_palm_section.stl"/>
+      </geometry>
+      <material name="thumb_palm_section_material">
+        <color rgba="0.87451 0.447059 0.317647 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0217843 0.00434121 0.000740247" rpy="1.82417 -0.17263 -3.79536e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_palm_section.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link thumb_middle -->
+  <link name="thumb_middle">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part thumb_middle -->
+    <visual>
+      <origin xyz="-0.0477856 -0.00705829 -0.00679029" rpy="0.273385 0.114287 1.56584e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_middle.stl"/>
+      </geometry>
+      <material name="thumb_middle_material">
+        <color rgba="1 0.756863 0.054902 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0477856 -0.00705829 -0.00679029" rpy="0.273385 0.114287 1.56584e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_middle.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link thumb_middle_2 -->
+  <link name="thumb_middle_2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part thumb_middle_2 -->
+    <visual>
+      <origin xyz="-0.0592938 -0.00820927 0.0104142" rpy="-1.31743 0.17263 1.27438e-17"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_middle__2.stl"/>
+      </geometry>
+      <material name="thumb_middle_2_material">
+        <color rgba="0.537255 0.854902 0.827451 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0592938 -0.00820927 0.0104142" rpy="-1.31743 0.17263 1.27438e-17"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_middle__2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link thumb_tip -->
+  <link name="thumb_tip">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part thumb_tip -->
+    <visual>
+      <origin xyz="-0.0791251 -0.0108018 0.0122142" rpy="-1.31743 0.17263 -6.58129e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_tip.stl"/>
+      </geometry>
+      <material name="thumb_tip_material">
+        <color rgba="0.6 0.6 0.6 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0791251 -0.0108018 0.0122142" rpy="-1.31743 0.17263 -6.58129e-18"/>
+      <geometry>
+        <mesh filename="package://assets\thumb_tip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from thumb_middle_2 to thumb_tip -->
+  <joint name="thumb_4" type="revolute">
+    <origin xyz="0.0198655 0.00231518 -0.00175" rpy="1.49558e-16 1.46949e-15 -9.24631e-17"/>
+    <parent link="thumb_middle_2"/>
+    <child link="thumb_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.5708"/>
+  </joint>
+  <!-- Joint from thumb_middle to thumb_middle_2 -->
+  <joint name="thumb_3" type="revolute">
+    <origin xyz="0.0128901 -0.0075423 -0.0055" rpy="1.5708 0.116019 -0.173775"/>
+    <parent link="thumb_middle"/>
+    <child link="thumb_middle_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.5708"/>
+  </joint>
+  <!-- Joint from thumb_palm_section to thumb_middle -->
+  <joint name="thumb_abd" type="revolute">
+    <origin xyz="0.0230132 -0.00731315 0.0159544" rpy="1.5708 -0.173775 -0.116019"/>
+    <parent link="thumb_palm_section"/>
+    <child link="thumb_middle"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.174533" upper="1.5708"/>
+  </joint>
+  <!-- Joint from thumb_intermediate_v1 to thumb_palm_section -->
+  <joint name="thumb_2" type="revolute">
+    <origin xyz="0.0118882 0.00195552 8.88178e-16" rpy="3.14159 5.97132e-17 1.21313e-17"/>
+    <parent link="thumb_intermediate_v1"/>
+    <child link="thumb_palm_section"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+    <mimic joint="thumb_1" multiplier="-1.0"/>
+  </joint>
+  <!-- Joint from palm_solid to thumb_intermediate_v1 -->
+  <joint name="thumb_1" type="revolute">
+    <origin xyz="0.0415321 0.0113204 -0.0257823" rpy="3.14159 -1.39817 2.88822"/>
+    <parent link="palm_solid"/>
+    <child link="thumb_intermediate_v1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.785398"/>
+  </joint>
+  <!-- Link finger_intermediate -->
+  <link name="finger_intermediate">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part finger_intermediate -->
+    <visual>
+      <origin xyz="0.0164705 -0.0600499 -0.0337993" rpy="-0.25043 1.21142 -7.14711e-17"/>
+      <geometry>
+        <mesh filename="package://assets\finger_intermediate.stl"/>
+      </geometry>
+      <material name="finger_intermediate_material">
+        <color rgba="0.372549 0.654902 0.239216 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0164705 -0.0600499 -0.0337993" rpy="-0.25043 1.21142 -7.14711e-17"/>
+      <geometry>
+        <mesh filename="package://assets\finger_intermediate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link pinky_finger_middle -->
+  <link name="pinky_finger_middle">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part pinky_finger_middle -->
+    <visual>
+      <origin xyz="0.0196463 0.0716718 0.0337993" rpy="2.89116 -1.21142 -3.78033e-17"/>
+      <geometry>
+        <mesh filename="package://assets\pinky_finger_middle.stl"/>
+      </geometry>
+      <material name="pinky_finger_middle_material">
+        <color rgba="0.972549 0.529412 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0196463 0.0716718 0.0337993" rpy="2.89116 -1.21142 -3.78033e-17"/>
+      <geometry>
+        <mesh filename="package://assets\pinky_finger_middle.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link pinky_finger_tip -->
+  <link name="pinky_finger_tip">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part pinky_finger_tip -->
+    <visual>
+      <origin xyz="0.0262361 -0.0957876 -0.0337993" rpy="-0.25043 1.21142 -2.01428e-17"/>
+      <geometry>
+        <mesh filename="package://assets\pinky_finger_tip.stl"/>
+      </geometry>
+      <material name="pinky_finger_tip_material">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0262361 -0.0957876 -0.0337993" rpy="-0.25043 1.21142 -2.01428e-17"/>
+      <geometry>
+        <mesh filename="package://assets\pinky_finger_tip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from pinky_finger_middle to pinky_finger_tip -->
+  <joint name="pinky_3" type="revolute">
+    <origin xyz="-0.00658981 -0.0241159 1.38778e-17" rpy="-3.14159 5.60477e-17 -4.80606e-14"/>
+    <parent link="pinky_finger_middle"/>
+    <child link="pinky_finger_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-1.91986" upper="4.79616e-14"/>
+  </joint>
+  <!-- Joint from finger_intermediate to pinky_finger_middle -->
+  <joint name="pinky_2" type="revolute">
+    <origin xyz="-0.00317575 0.0116219 -4.16334e-17" rpy="3.14159 -1.74128e-16 -5.94739e-16"/>
+    <parent link="finger_intermediate"/>
+    <child link="pinky_finger_middle"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.785398"/>
+    <mimic joint="pinky_1" multiplier="-1.0"/>
+  </joint>
+  <!-- Joint from palm_solid to finger_intermediate -->
+  <joint name="pinky_1" type="revolute">
+    <origin xyz="0.102144 0.0193138 -0.0731018" rpy="3.14159 -0.359375 1.82123"/>
+    <parent link="palm_solid"/>
+    <child link="finger_intermediate"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="0"/>
+  </joint>
+  <!-- Link index_finger_intermediate -->
+  <link name="index_finger_intermediate">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part index_finger_intermediate -->
+    <visual>
+      <origin xyz="-0.0611244 -0.0420268 0.0174182" rpy="1.04885 1.48361 5.54537e-17"/>
+      <geometry>
+        <mesh filename="package://assets\index_finger_intermediate.stl"/>
+      </geometry>
+      <material name="index_finger_intermediate_material">
+        <color rgba="0.615686 0.811765 0.929412 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0611244 -0.0420268 0.0174182" rpy="1.04885 1.48361 5.54537e-17"/>
+      <geometry>
+        <mesh filename="package://assets\index_finger_intermediate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link hand_v2_index_finger_middle_v1 -->
+  <link name="hand_v2_index_finger_middle_v1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part hand_v2_index_finger_middle_v1 -->
+    <visual>
+      <origin xyz="-0.0715781 -0.0480165 0.0274182" rpy="1.04885 1.48361 -4.8223e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_index_finger_middle_v1.stl"/>
+      </geometry>
+      <material name="hand_v2_index_finger_middle_v1_material">
+        <color rgba="0.654902 0.584314 0.823529 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0715781 -0.0480165 0.0274182" rpy="1.04885 1.48361 -4.8223e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_index_finger_middle_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link hand_v2_index_finger_tip_v1 -->
+  <link name="hand_v2_index_finger_tip_v1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part hand_v2_index_finger_tip_v1 -->
+    <visual>
+      <origin xyz="-0.0932697 0.0604451 -0.0274182" rpy="-2.09275 -1.48361 1.2301e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_index_finger_tip_v1.stl"/>
+      </geometry>
+      <material name="hand_v2_index_finger_tip_v1_material">
+        <color rgba="0.8 0.8 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0932697 0.0604451 -0.0274182" rpy="-2.09275 -1.48361 1.2301e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_index_finger_tip_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from hand_v2_index_finger_middle_v1 to hand_v2_index_finger_tip_v1 -->
+  <joint name="index_3" type="revolute">
+    <origin xyz="0.0216917 0.0124287 -5.55112e-17" rpy="-3.14159 -1.11923e-14 9.36753e-14"/>
+    <parent link="hand_v2_index_finger_middle_v1"/>
+    <child link="hand_v2_index_finger_tip_v1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.91986"/>
+  </joint>
+  <!-- Joint from index_finger_intermediate to hand_v2_index_finger_middle_v1 -->
+  <joint name="index_2" type="revolute">
+    <origin xyz="0.0104536 0.00598961 -0.01" rpy="-2.68081e-15 -7.18816e-15 -6.37445e-15"/>
+    <parent link="index_finger_intermediate"/>
+    <child link="hand_v2_index_finger_middle_v1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="7.10543e-15"/>
+    <mimic joint="index_1" multiplier="1.0"/>
+  </joint>
+  <!-- Joint from palm_solid to index_finger_intermediate -->
+  <joint name="index_1" type="revolute">
+    <origin xyz="0.115516 0.00102561 -0.0129949" rpy="-3.14159 -0.0871834 0.521949"/>
+    <parent link="palm_solid"/>
+    <child link="index_finger_intermediate"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="7.10543e-15"/>
+  </joint>
+  <!-- Link middle_finger_intermediate -->
+  <link name="middle_finger_intermediate">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part middle_finger_intermediate -->
+    <visual>
+      <origin xyz="-0.00399892 -0.0775232 -0.000461794" rpy="0.103486 1.41091 -3.43453e-18"/>
+      <geometry>
+        <mesh filename="package://assets\middle_finger_intermediate.stl"/>
+      </geometry>
+      <material name="middle_finger_intermediate_material">
+        <color rgba="0.980392 0.713725 0.00392157 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00399892 -0.0775232 -0.000461794" rpy="0.103486 1.41091 -3.43453e-18"/>
+      <geometry>
+        <mesh filename="package://assets\middle_finger_intermediate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link hand_v2_middle_finger_middle_v1 -->
+  <link name="hand_v2_middle_finger_middle_v1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part hand_v2_middle_finger_middle_v1 -->
+    <visual>
+      <origin xyz="-0.00525939 0.0895051 0.000461794" rpy="-3.03811 -1.41091 -5.9674e-18"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_middle_finger_middle_v1.stl"/>
+      </geometry>
+      <material name="hand_v2_middle_finger_middle_v1_material">
+        <color rgba="0.341176 0.776471 0.741176 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00525939 0.0895051 0.000461794" rpy="-3.03811 -1.41091 -5.9674e-18"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_middle_finger_middle_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link hand_v2_middle_finger_tip_v1 -->
+  <link name="hand_v2_middle_finger_tip_v1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part hand_v2_middle_finger_tip_v1 -->
+    <visual>
+      <origin xyz="-0.00787492 0.114368 -0.00953821" rpy="-3.03811 -1.41091 -1.00342e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_middle_finger_tip_v1.stl"/>
+      </geometry>
+      <material name="hand_v2_middle_finger_tip_v1_material">
+        <color rgba="0.823529 0.623529 0.0352941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00787492 0.114368 -0.00953821" rpy="-3.03811 -1.41091 -1.00342e-17"/>
+      <geometry>
+        <mesh filename="package://assets\hand_v2_middle_finger_tip_v1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from hand_v2_middle_finger_middle_v1 to hand_v2_middle_finger_tip_v1 -->
+  <joint name="middle_3" type="revolute">
+    <origin xyz="0.00261552 -0.0248628 0.01" rpy="-8.89632e-16 1.59466e-16 -1.26217e-13"/>
+    <parent link="hand_v2_middle_finger_middle_v1"/>
+    <child link="hand_v2_middle_finger_tip_v1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.91986"/>
+  </joint>
+  <!-- Joint from middle_finger_intermediate to hand_v2_middle_finger_middle_v1 -->
+  <joint name="middle_2" type="revolute">
+    <origin xyz="0.00126047 0.0119819 -3.46945e-18" rpy="-3.14159 2.22814e-17 9.10685e-16"/>
+    <parent link="middle_finger_intermediate"/>
+    <child link="hand_v2_middle_finger_middle_v1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-8.88178e-16" upper="0.785398"/>
+  </joint>
+  <!-- Joint from palm_solid to middle_finger_intermediate -->
+  <joint name="middle_1" type="revolute">
+    <origin xyz="0.120616 0.00384527 -0.0354885" rpy="3.14159 -0.159882 1.46731"/>
+    <parent link="palm_solid"/>
+    <child link="middle_finger_intermediate"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="8.88178e-16"/>
+    <mimic joint="middle_2" multiplier="-1.0"/>
+  </joint>
+  <!-- Link ring_finger_intermediate -->
+  <link name="ring_finger_intermediate">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part ring_finger_intermediate -->
+    <visual>
+      <origin xyz="0.0163093 -0.0699225 -0.01635" rpy="-0.184188 1.2871 -2.49666e-18"/>
+      <geometry>
+        <mesh filename="package://assets\ring_finger_intermediate.stl"/>
+      </geometry>
+      <material name="ring_finger_intermediate_material">
+        <color rgba="0.768627 0.886275 0.952941 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0163093 -0.0699225 -0.01635" rpy="-0.184188 1.2871 -2.49666e-18"/>
+      <geometry>
+        <mesh filename="package://assets\ring_finger_intermediate.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link large_finger_middle -->
+  <link name="large_finger_middle">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part large_finger_middle -->
+    <visual>
+      <origin xyz="0.0186045 0.0817499 0.01635" rpy="2.9574 -1.2871 -1.41348e-17"/>
+      <geometry>
+        <mesh filename="package://assets\large_finger_middle.stl"/>
+      </geometry>
+      <material name="large_finger_middle_material">
+        <color rgba="0.0862745 0.317647 0.690196 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0186045 0.0817499 0.01635" rpy="2.9574 -1.2871 -1.41348e-17"/>
+      <geometry>
+        <mesh filename="package://assets\large_finger_middle.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Link large_finger_tip -->
+  <link name="large_finger_tip">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-09"/>
+      <inertia ixx="1e-09" ixy="0" ixz="0" iyy="1e-09" iyz="0" izz="1e-09"/>
+    </inertial>
+    <!-- Part large_finger_tip -->
+    <visual>
+      <origin xyz="0.023367 0.106292 0.00635002" rpy="2.9574 -1.2871 -7.00224e-18"/>
+      <geometry>
+        <mesh filename="package://assets\large_finger_tip.stl"/>
+      </geometry>
+      <material name="large_finger_tip_material">
+        <color rgba="0.282353 0.54902 0.160784 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.023367 0.106292 0.00635002" rpy="2.9574 -1.2871 -7.00224e-18"/>
+      <geometry>
+        <mesh filename="package://assets\large_finger_tip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <!-- Joint from large_finger_middle to large_finger_tip -->
+  <joint name="ring_3" type="revolute">
+    <origin xyz="-0.00476256 -0.0245422 0.01" rpy="1.57715e-14 1.22998e-14 -1.57971e-13"/>
+    <parent link="large_finger_middle"/>
+    <child link="large_finger_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="1.91986"/>
+  </joint>
+  <!-- Joint from ring_finger_intermediate to large_finger_middle -->
+  <joint name="ring_2" type="revolute">
+    <origin xyz="-0.00229517 0.0118273 0" rpy="3.14159 1.18195e-14 -1.20053e-14"/>
+    <parent link="ring_finger_intermediate"/>
+    <child link="large_finger_middle"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="0" upper="0.785398"/>
+    <mimic joint="ring_1" multiplier="-1.0"/>
+  </joint>
+  <!-- Joint from palm_solid to ring_finger_intermediate -->
+  <joint name="ring_1" type="revolute">
+    <origin xyz="0.113862 0.00976619 -0.0559307" rpy="-3.14159 -0.283692 1.75498"/>
+    <parent link="palm_solid"/>
+    <child link="ring_finger_intermediate"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="0"/>
+  </joint>
+  <!-- Joint from intermediate_link to palm_solid -->
+  <joint name="wrist_2" type="revolute">
+    <origin xyz="0.0252 2.77556e-17 -2.22045e-16" rpy="3.14159 4.90528e-15 -2.48676e-30"/>
+    <parent link="intermediate_link"/>
+    <child link="palm_solid"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="0.785398"/>
+    <mimic joint="wrist_1" multiplier="-1.0"/>
+  </joint>
+  <!-- Joint from base_2 to intermediate_link -->
+  <joint name="wrist_1" type="revolute">
+    <origin xyz="0.0334815 0.003 -0.2325" rpy="3.14159 1.5708 0"/>
+    <parent link="base_2"/>
+    <child link="intermediate_link"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-0.785398" upper="0.785398"/>
+  </joint>
+  <!-- Joint from elbow to base_2 -->
+  <joint name="forearm" type="revolute">
+    <origin xyz="-5.55112e-16 0.09 -0.04" rpy="1.5708 -1.5708 0"/>
+    <parent link="elbow"/>
+    <child link="base_2"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from upper_arm to elbow -->
+  <joint name="elbow" type="revolute">
+    <origin xyz="0.04 -1.38778e-16 -0.26" rpy="-1.5708 3.46945e-16 -1.5708"/>
+    <parent link="upper_arm"/>
+    <child link="elbow"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from shoulder to upper_arm -->
+  <joint name="shoulder_roll" type="revolute">
+    <origin xyz="-2.77556e-17 0.08 -0.1" rpy="1.5708 -1.5708 0"/>
+    <parent link="shoulder"/>
+    <child link="upper_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from base to shoulder -->
+  <joint name="shoulder_pitch" type="revolute">
+    <origin xyz="0.1 -8.21518e-18 -0.132918" rpy="-1.40164e-43 1.5708 0"/>
+    <parent link="base"/>
+    <child link="shoulder"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from ground to base -->
+  <joint name="base" type="revolute">
+    <origin xyz="-9.53188e-29 5.44968e-18 0.102" rpy="-3.14159 -2.08167e-17 1.5708"/>
+    <parent link="ground"/>
+    <child link="base"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+</robot>
