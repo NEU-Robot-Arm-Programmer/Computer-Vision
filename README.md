@@ -48,7 +48,7 @@ project-root/
 ├── tests/                              # Test scripts
 │   ├── Hand_tracking Tests.py
 │   ├── Gesture_test.py
-├── requirements.txt
+├── pyproject.toml                     # Poetry package tthat has all needed libraries
 └── README.md
 ```
 
@@ -84,7 +84,7 @@ project-root/
       poetry shell
    ```
 
-> **python version:\*** This project needs 3.11 < 3.14 is the recommeded,>
+> **python version:\*** This project needs between 3.11 and 3.14
 
 ### 🎥 Intel RealSense Camera (Apple Silicon / arm64)
 
@@ -131,7 +131,6 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 
 ## 🧾 Future Improvements
 
-- Integrate deep learning gesture classifiers.
 - Expand hardware integration (Arduino, servos, etc.).
 - Build GUI for live visualizations and calibration.
 - Improve Communication with other drivers
@@ -142,6 +141,7 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 
 **Thomas Rowan**
 **Stephen Sodipo**
+**And members from the Robot Arm Software team**
 
 Feel free to fork and experiment!
 
