@@ -6,6 +6,7 @@ This repository contains several iterations and supporting modules for detecting
 ---
 
 ## 🚀 Features
+
 - Real-time **hand detection** and tracking using `mediapipe` and `cv2`.
 - Integration with **Intel RealSense** (`pyrealsense2`) for depth measurement.
 - **Gesture recognition** module built on top of tracking.
@@ -15,12 +16,14 @@ This repository contains several iterations and supporting modules for detecting
 ---
 
 ## 🧩 Tech Stack
-- **Language:** Python 3.x  
+
+- **Language:** Python >= 3.11, <3.14
 - **Libraries:** `mediapipe`, `opencv-python`, `numpy`, `pyrealsense2`, `matplotlib`, `adafruit_bno055`, `pyfirmata`
 
 ---
 
 ## 📂 Folder Structure
+
 ```
 project-root/
 ├── docs/                               # Documentation
@@ -54,28 +57,52 @@ project-root/
 ## ⚙️ Installation
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/NEU-Robot-Arm-Programmer/Computer-Vision.git
-   cd hand-gesture-tracking
+   cd Computer Vision
    ```
 
-2. Create a virtual environment (recommended):
+2. Install Poestry if you dont have it already
+
+   **macOS**
+
    ```bash
-   python -m venv venv
-   source venv/bin/activate   # macOS/Linux
-   venv\Scripts\activate    # Windows
+   brew install poetry
    ```
 
-3. Install dependencies:
+3. Set up the environment and install dependencies:
+
    ```bash
-   pip install -r requirements.txt
+   poetry env use python3.12
+   poetry install --no-root
    ```
 
----
+4. Activate the virtual environments:
+
+   ```bash
+      poetry shell
+   ```
+
+> **python version:\*** This project needs 3.11 < 3.14 is the recommeded,>
+
+### 🎥 Intel RealSense Camera (Apple Silicon / arm64)
+
+`pyrealsense2` is **not available on PyPI for arm64 Macs**. If you need RealSense depth camera support, install the native library via Homebrew instead:
+
+```bash
+brew install librealsense
+```
+
+For Python bindings, build from source:
+[https://github.com/IntelRealSense/librealsense](https://github.com/IntelRealSense/librealsense)
+
+RealSense is optional — the project will still run 2D hand detection and gesture recognition without it.
 
 ## ▶️ Usage
 
 Run the main script:
+
 ```bash
   python src/main.py
 ```
@@ -86,6 +113,7 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 ---
 
 ## 🧠 How It Works
+
 1. The **MediaPipe** pipeline detects hand landmarks in real time.
 2. **OpenCV** handles video frame processing and visualization.
 3. **NumPy** assists in geometric calculations (angles, distances).
@@ -94,6 +122,7 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 ---
 
 ## 🧰 Development Notes
+
 - Older prototypes are preserved in `src/archive/`.
 - The `Gesture_recognition.py` script demonstrates gesture classification examples.
 - The codebase is modular — you can integrate new gesture rules or sensor inputs easily.
@@ -101,6 +130,7 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 ---
 
 ## 🧾 Future Improvements
+
 - Integrate deep learning gesture classifiers.
 - Expand hardware integration (Arduino, servos, etc.).
 - Build GUI for live visualizations and calibration.
@@ -109,12 +139,14 @@ Without a RealSense device, it will still perform 2D hand detection and gesture 
 ---
 
 ## 👤 Authors
+
 **Thomas Rowan**
-**Stephen Sodipo** 
- 
+**Stephen Sodipo**
+
 Feel free to fork and experiment!
 
 ---
 
 ## 🪪 License
+
 This project is released under the MIT License.

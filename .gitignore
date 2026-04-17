@@ -1,2 +1,6 @@
 .idea/x
 *.DS_Store.DS_Store
+venv/
+.venv/
+__pycache__/
+*.pyc
