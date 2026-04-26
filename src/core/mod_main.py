@@ -6,10 +6,6 @@ import threading
 from collections import deque
 
 class HandDetector:
-	"""
-	This is the modified handtracking class, that displays the hands, markings used to be tracked,
-	values on the screen of the estimated values you hand is moving at.
-	"""
 	def __init__(self, mode=False, max_hands=2, model_complexity=1,
 				 detection_confidence=0.5, tracking_confidence=0.5):
 		self.mode = mode
@@ -300,6 +296,113 @@ class HandDetector:
 		return fingers  # Returns list like [1, 0, 0, 0, 0] for just Thumb up
 
 
+class GestureRecognizer:
+	"""
+	Gesture Recognizer, each gesture is defined as a dict with a
+	'fingers' : list of 5 ints
+	'side': "Palm", "Back" or None (can be changed)
+	'roll-range': (min_deg, max_deg) or None
+	'name': display string
+	'priority': higher is checked first
+
+	Gestures are checked in descending order, the first match wins.
+
+	you can add your own by doing something like
+		recognizer.register(fingers=[1,0,0,0,0], side=None, name="Thumbs Up")
+	"""
+	def __init__(self):
+		self._gestures = []
+		self._register_defaults()
+
+	def register(self, fingers, name, side=None, roll_range=None, priority=0):
+		"""
+		Add a new gesture rule
+		"""
+		self._gestures.append({
+			"fingers": fingers,
+			"side": side,
+			"roll_range": roll_range,
+			"name": name,
+			"priority": priority,
+		})
+		self._gestures.sort(key=lambda g: g["priority"], reverse=True)
+
+	def recognize(self, fingers, side, roll=0.0):
+		"""
+		fingers : list of 5 ints  [Thumb, Index, Middle, Ring, Pinky]
+        side    : "Palm" or "Back"
+        roll    : float (degrees) from calculate_hand_rotation
+
+        Returns the gesture name string, or "Unknown" if nothing matches.
+        """
+		for g in self._gestures:
+			if self._match(g, fingers, side, roll):
+				return g["name"]
+		return "Unknown"
+
+	def _match(self, g, fingers, side, roll):
+		# check if the finger pattern is none
+		for expected, actual in zip(g["fingers"], fingers):
+			if expected is not None and expected != actual:
+				return False
+
+		# check the orientation
+		if g["side"] is not None and g["side"] != side:
+			return False
+
+		if g["roll_range"] is not None:
+			lo, hi = g["roll_range"]
+			if not (lo <= roll <= hi):
+				return False
+
+		return True
+
+	def _register_defaults(self):
+		"""
+		Built-in gesture library
+		# TODO: Extend or override these
+
+		fingers = [Thumb, Index, Middle, Ring, Pinky]
+		"""
+		gestures = [
+			# higher priorities
+			dict(fingers=[0, 1, 1, 1, 1], side=None, name="Open Hand", priority=10),
+			dict(fingers=[0, 0, 0, 0, 0], side="Palm", name="Fist (Palm)", priority=10),
+			dict(fingers=[0, 0, 0, 0, 0], side="Back", name="Fist (Back)", priority=10),
+
+			# == ointing / counting
+			dict(fingers=[0, 1, 0, 0, 0], side=None, name="Point", priority=8),
+			dict(fingers=[0, 1, 1, 0, 0], side=None, name="Peace / Two", priority=8),
+			dict(fingers=[0, 1, 1, 1, 0], side=None, name="Three", priority=7),
+			dict(fingers=[1, 1, 1, 1, 1], side=None, name="Four", priority=7),
+
+			dict(fingers=[1, 0, 0, 0, 1], side=None, name="Hang Loose", priority=8),
+
+			# == Thumb gestures
+			dict(fingers=[1, 0, 0, 0, 0], side="Palm", name="Thumbs Up", priority=9),
+			dict(fingers=[1, 0, 0, 0, 0], side="Back", name="Thumbs Up (Back)", priority=9),
+
+			# == Pinky
+			dict(fingers=[0, 0, 0, 0, 1], side=None, name="Pinky Up", priority=7),
+
+			# == Rock
+			dict(fingers=[1, 1, 0, 0, 1], side=None, name="Rock On", priority=8),
+
+			# == OK / pinch (thumb + index, others closed)
+			dict(fingers=[0, 0, 1, 1, 1], side=None, name="OK / Pinch", priority=8),
+
+			# == L-shape
+			dict(fingers=[1, 1, 0, 0, 0], side=None, name="L-Shape", priority=7),
+
+			# == Rotation-based gestures (roll-angle aware)
+			# Open hand rotated so palm faces down → "Stop / Halt"
+			dict(fingers=[1, 1, 1, 1, 1], side="Back",
+			     roll_range=(-30, 30), name="Stop (Back)", priority=11),
+		]
+
+		for g in gestures:
+			self.register(**g)
+
 class ThreadedCamera:
 	"""
 	Captures frames in a background thread so the main loop is never blocked waiting
@@ -385,6 +488,33 @@ def draw_rotation_arc(img, roll, cx, cy, radius=40, color=(255, 255, 0)):
 	cv2.line(img, (cx, cy), (nx, ny), color, 2)
 	cv2.circle(img, (nx, ny), 4, color, cv2.FILLED)
 
+def draw_gesture(img, gesture, wrist_x, wrist_y, side="Palm"):
+	"""
+	Draws the guesture name in the filled rounded rectangle above the wrist
+	"""
+	bg_color = (0, 180, 0) if side == "Palm" else (180, 0, 0)
+	text_color = (255, 255, 255)
+	font = cv2.FONT_HERSHEY_SIMPLEX
+	scale = 0.65
+	thickness = 2
+
+	(tw, th), _ = cv2.getTextSize(gesture, font, scale, thickness)
+	pad = 6
+	x1 = wrist_x - tw // 2 - pad
+	y1 = wrist_y - 90 - th - pad
+	x2 = wrist_x + tw // 2 + pad
+	y2 = wrist_y - 90 + pad
+
+	# Clamp to image bounds
+	h, w = img.shape[:2]
+	x1, y1 = max(x1, 0), max(y1, 0)
+	x2, y2 = min(x2, w - 1), min(y2, h - 1)
+
+	cv2.rectangle(img, (x1, y1), (x2, y2), bg_color, cv2.FILLED)
+	cv2.putText(img, gesture,
+	            (x1 + pad, y2 - pad),
+	            font, scale, text_color, thickness)
+
 
 def main():
 	cam = ThreadedCamera(src=0, width=640, height=480)
@@ -401,8 +531,11 @@ def main():
 		tracking_confidence=0.6,
 	)
 
+	recognizer = GestureRecognizer()
+
 	pTime = time.time()
 	print("Hand Tracking v1 - Press 'q' to quit")
+	print("Registed guestures", [g["name"] for g in recognizer._gestures])
 
 	while True:
 		ret, img = cam.read()
@@ -434,6 +567,10 @@ def main():
 				rotation = detector.calculate_hand_rotation(hand_lms, mp_label)
 				draw_rotation(img, rotation, hand_num=hand_num, side=side)
 
+				# gestures
+				fingers = detector.get_fingers_up(hand_lms)
+				gesture = recognizer.recognize(fingers, side, roll=rotation["roll"])
+
 				# wrist label + roll
 				if lm_list:
 					wrist_x, wrist_y = lm_list[0][1], lm_list[0][2]
@@ -442,6 +579,8 @@ def main():
 					cv2.putText(img, info_text, (wrist_x - 40, wrist_y - 30),
 								cv2.FONT_HERSHEY_SIMPLEX, 0.55,
 								(0, 255, 0) if side == "Palm" else (0, 0, 255), 2)
+
+					draw_gesture(img, gesture, wrist_x, wrist_y, side)
 
 					# roll the arc drawn at the wrist position
 					draw_rotation_arc(img, rotation["roll"],
